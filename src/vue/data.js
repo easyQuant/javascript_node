@@ -9,6 +9,10 @@ class Vue {
 // 对对象所有属性 进行 数据观测
 function observer (value) {
 
+    if (!value || (typeof value !== 'object')) {
+        return false
+    }
+
     Object.keys(value).forEach(key => {
 
         // 对每个属性进行数据观测
