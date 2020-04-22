@@ -45,6 +45,9 @@ function defineReactive (obj, key, val) {
                 return false
             }
 
+            // 更新reactiveGetter 中返回的值
+            val = newVal
+
             // 数据更新了 调用回调
             cb(newVal)
         }
@@ -63,3 +66,6 @@ console.log(vue._data.count)
 // 触发 defineReactive 的 reactiveStter 方法
 // 进行更新视图callback
 vue._data.count = 2
+
+// 再次获取时 是刚刚更改过的
+console.log(vue._data.count)
