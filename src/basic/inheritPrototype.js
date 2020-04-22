@@ -68,13 +68,13 @@ function inheritPrototype (_sub, _super) {
     // 把父类的原型对象 克隆一份 这样就不用生成父类的实例的 修补了组合继承实例化2次的缺点
     let _prototype = _create(_super.prototype)
 
+    // 修复构造函数的指向
+    _prototype.constructor = _sub
+
     // 实例指向子类的原型对象
     _sub.prototype = _prototype
-
-    // 修复构造函数指向
-    _sub.constructor = _sub
 
     return _sub
 }
 
-let sub = inheritPrototype(Sub, Super)
+let sub = new inheritPrototype(Sub, Super)
