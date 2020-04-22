@@ -58,17 +58,19 @@ python代码暂时告一段落了 量化策略和本地的交易系统 已经稳
 
 1. vue与angular的区别？
 
-2. vue的生命周期有哪些 做了什么
+2. vue如何封装高质量的组件
 
-3. computed method data 的区别
+3. vue的生命周期有哪些 做了什么
 
-4. vue的响应式原理描述一下
+4. computed method data props 的区别
 
-5. vuex的实现原理是什么
+5. vue的响应式原理描述一下
 
-6. virtual dom 的渲染过程是什么
+6. vuex的实现原理是什么
 
-7. 简述一下 vue 的 diff算法
+7. virtual dom 的渲染过程是什么
+
+8. 简述一下 vue 的 diff算法
 
 ### web相关 - 2020-04-22
 
