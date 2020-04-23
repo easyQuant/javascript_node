@@ -75,11 +75,16 @@ function defineReactive (obj, key, val) {
 
 let vue = new Vue({
     data: {
-        count: 1
+        count: 1,
+        name: 'quant'
     }
 })
 
 vue._data.count = 2
+
+// 因为构造函数中 没有进行name的依赖收集
+vue._data.name = 'trade'
+
 
 // // 触发 defineReactive 的 reactiveGetter 方法
 // console.log(vue._data.count)
