@@ -1,0 +1,23 @@
+{
+  "name": "javascript_node",
+  "version": "1.0.0",
+  "description": "python代码暂时告一段落了 量化策略和本地的交易系统 已经稳定跑起来",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easyQuant/javascript_node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/easyQuant/javascript_node/issues"
+  },
+  "homepage": "https://github.com/easyQuant/javascript_node#readme",
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}

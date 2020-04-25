@@ -54,27 +54,33 @@ let _super = new Super()
 let sub = _create(_super)
 
 // 5. 寄生式继承
-function inheritPrototype (o) {
-    let _prototype = _create(o)
-    return _prototype
+function Sub () {
+    Super.call(this)
 }
 
-let _super = new Super()
-let sub = inheritPrototype(_super)
+function Super () {}
 
-// 6. 寄生组合继承
-function inheritPrototype (_sub, _super) {
+function _create (o) {
 
-    // 把父类的原型对象 克隆一份 这样就不用生成父类的实例的 修补了组合继承实例化2次的缺点
-    let _prototype = _create(_super.prototype)
+    function F () {}
+    
+    F.prototype = o
 
-    // 修复构造函数的指向
-    _prototype.constructor = _sub
-
-    // 实例指向子类的原型对象
-    _sub.prototype = _prototype
-
-    return _sub
+    return new F()
 }
 
-let sub = new inheritPrototype(Sub, Super)
+function interitPrototype (Sub, Super) {
+
+    // 获取父类原型对象的clone
+    let _prototype = _create(Super.prototype)
+
+    // 修复父类构造函数指向
+    _prototype.constructor = Sub
+
+    // 挂载原型对象到子类
+    Sub.prototype = _prototype
+
+    return Sub
+}
+
+let sub = new interitPrototype(Sub, Super)

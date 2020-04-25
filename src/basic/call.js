@@ -4,39 +4,59 @@
 // 2. call 和 apply都只改变一次this 直接返回函数结果 bind 返回一个永久指向该this的函数 
 // 后续使用call或者apply都无法改变this
 // 3. bind返回 的 函数可以多次传参
-let max1 = Math.max.apply(null, [1, 2, 3])
-let max2 = Math.max.call(null, 1, 2,3)
-let max3 = Math.max.bind(null, 1, 2, 3)
+// let max1 = Math.max.apply(null, [1, 2, 3])
+// let max2 = Math.max.call(null, 1, 2,3)
+// let max3 = Math.max.bind(null, 1, 2, 3)
 
-console.log(max1)
-console.log(max2)
-console.log(max3())
-console.log(max3(4))
-
-// 实现bind函数
 Function.prototype._bind = function () {
-
-    // 获取本身的this指向
     let _self = this
-    
-    // 保存第一次bind传入的this指向
+
+    if (!_self) {
+        _self = typeof window !== 'undefined' ? window : global
+    }
+
     let _fn = arguments[0]
 
-    // 获取传入的参数
+    // 对arguments 使用 slice函数 传递参数为1
     let _args = Array.prototype.slice.call(arguments, 1)
 
-    // 返回一个可以随时 this指向 _fn的函数
     return function () {
 
-        // 拼接参数
+        // 合并数组 对 _args 进行 concat 操作 传递参数为 arguments
         _args = _args.concat.apply(_args, arguments)
 
-        // 调用this指向 _fn的函数 参数是拼接好的
         return _self.apply(_fn, _args)
     }
 }
 
-let max4 = Math.max._bind(global, 1, 2, 3)
-console.log(max4())
-console.log(max4(4))
-console.log(max4(5))
+let max1 = Math.max._bind(null, 1, 2, 3)
+console.log(max1())
+console.log(max1(4))
+
+Function.prototype._call = function () {
+
+    // 获得当前传入的this对象
+    let context = arguments[0]
+
+    if (!context) {
+        context = typeof window !== 'undefined' ? window : global
+    }
+
+    let args = []
+
+    for (let i = 0;i < arguments.length;i++) {
+        args.push('arguments[' + i + ']')
+    }
+
+    // 把当前function放到this对象上 这样后续调用fn this的指向就是 传入的this
+    context._fn = this
+
+    // context._fn()
+    let result = eval('context._fn(' + args + ')')
+
+    delete context._fn
+
+    return result
+}
+
+console.log(Math.max._call(null, 1, 2, 3, 4, 5))
